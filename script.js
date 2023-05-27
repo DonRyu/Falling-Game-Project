@@ -14,6 +14,7 @@ function keyDown(ev) {
   keys[ev.key] = true;
 }
 function keyUp(ev) {
+    
   keys[ev.key] = false;
 }
 
