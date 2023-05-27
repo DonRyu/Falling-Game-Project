@@ -39,18 +39,23 @@ function playarea() {
       player.x = player.x + player.step;
     }
 
+    window.requestAnimationFrame(playarea)
     playerCar.style.top = player.y + "px";
     playerCar.style.left = player.x + "px";
-    window.requestAnimationFrame(playarea);
   }
 }
 
 //Main
 function init() {
   player.start = true;
+  window.requestAnimationFrame(playarea);
+
   let playerCar = document.createElement("div");
   playerCar.setAttribute("class", "car");
   roadarea.appendChild(playerCar);
+
+  player.x = playerCar.offsetLeft;
+  player.y = playerCar.offsetTop;
 }
 
 init();
