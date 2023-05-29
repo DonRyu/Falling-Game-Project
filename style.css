@@ -18,3 +18,11 @@ body{
     position: absolute;
     bottom: 120px;
 }
+
+.line{
+    width:10px;
+    height:100px;
+    position: absolute;
+    background-color: white;
+    margin-left: 250px;
+}

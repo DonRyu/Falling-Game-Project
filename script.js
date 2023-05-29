@@ -17,17 +17,18 @@ function keyUp(ev) {
   keys[ev.key] = false;
 }
 
-function movelines(){
-  let roadlines = document.querySelectorAll('.line');
-  roadlines.forEach(function(item){
-    if(item.y >= 700){
-        item.y = item.y - 750;
+
+// moving lines
+function movelines() {
+  let roadlines = document.querySelectorAll(".line");
+  roadlines.forEach(function (item) {
+    if (item.y >= 700) {
+      item.y = item.y - 750;
     }
-    item.y =  item.y + player.step;
-    item.style.top =  item.y
+    item.y = item.y + player.step;
+    item.style.top = item.y +"px";
   });
 }
-
 
 //Player Moving 제한
 function playarea() {
@@ -36,16 +37,17 @@ function playarea() {
 
   // 플레이어가 road area를 벗어나지 않도록 하기 위함
   if (player.start) {
-    if (keys.ArrowUp & player.y > (road.top + 20)) {
+    movelines();
+    if (keys.ArrowUp & (player.y > road.top + 20)) {
       player.y = player.y - player.step;
     }
-    if (keys.ArrowDown && player.y < (road.bottom - 80)) {
+    if (keys.ArrowDown && player.y < road.bottom - 80) {
       player.y = player.y + player.step;
     }
     if (keys.ArrowLeft && player.x > 0) {
       player.x = player.x - player.step;
     }
-    if (keys.ArrowRight && player.x < (road.width - 64)) {
+    if (keys.ArrowRight && player.x < road.width - 64) {
       // width(50) + border(2*7)
       player.x = player.x + player.step;
     }
@@ -64,7 +66,13 @@ function init() {
   playerCar.setAttribute("class", "car");
   roadarea.appendChild(playerCar);
 
-  let roadlines = document.
+  for (x = 0; x < 5; x++) {
+    let roadlines = document.createElement("div");
+    roadlines.setAttribute("class", "line");
+    roadlines.y = x * 150;
+    roadlines.style.top = roadlines.y + "px";
+    roadarea.appendChild(roadlines);
+  }
 
   player.x = playerCar.offsetLeft;
   player.y = playerCar.offsetTop;
