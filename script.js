@@ -30,9 +30,23 @@ function movelines() {
 }
 
 //moving cloud
-function moveClouds() {
+function moveClouds(playerCar) {
   let cloud = document.querySelectorAll(".cloud");
+  let playerBoun = playerCar.getBoundingClientRect();
+
   cloud.forEach(function (item) {
+    // check if player collide
+    let cloudBoun = item.getBoundingClientRect();
+    if (
+      !(playerBoun.bottom < cloudBoun.top) ||
+      playerBoun.top < cloudBoun.bottom ||
+      playerBoun.left < cloudBoun.right ||
+      playerBoun.right < cloudBoun.left
+    ) {
+      //Player Fail
+      player.start = false;
+    }
+
     if (item.y > 750) {
       item.y = -300;
       item.style.left = Math.floor(Math.random() * 350) + "px";
@@ -50,7 +64,7 @@ function playarea() {
   // 플레이어가 road area를 벗어나지 않도록 하기 위함
   if (player.start) {
     movelines();
-    moveClouds();
+    moveClouds(playerCar);
     if (keys.ArrowUp & (player.y > road.top + 20)) {
       player.y = player.y - player.step;
     }
