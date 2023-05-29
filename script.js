@@ -17,7 +17,6 @@ function keyUp(ev) {
   keys[ev.key] = false;
 }
 
-
 // moving lines
 function movelines() {
   let roadlines = document.querySelectorAll(".line");
@@ -26,7 +25,20 @@ function movelines() {
       item.y = item.y - 750;
     }
     item.y = item.y + player.step;
-    item.style.top = item.y +"px";
+    item.style.top = item.y + "px";
+  });
+}
+
+//moving cloud
+function moveClouds() {
+  let cloud = document.querySelectorAll(".cloud");
+  cloud.forEach(function (item) {
+    if (item.y > 750) {
+      item.y = -300;
+      item.style.left = Math.floor(Math.random() * 350) + "px";
+    }
+    item.y = item.y + player.step;
+    item.style.top = item.y + "px";
   });
 }
 
@@ -38,6 +50,7 @@ function playarea() {
   // 플레이어가 road area를 벗어나지 않도록 하기 위함
   if (player.start) {
     movelines();
+    moveClouds();
     if (keys.ArrowUp & (player.y > road.top + 20)) {
       player.y = player.y - player.step;
     }
@@ -66,6 +79,9 @@ function init() {
   playerCar.setAttribute("class", "car");
   roadarea.appendChild(playerCar);
 
+  player.x = playerCar.offsetLeft;
+  player.y = playerCar.offsetTop;
+
   for (x = 0; x < 5; x++) {
     let roadlines = document.createElement("div");
     roadlines.setAttribute("class", "line");
@@ -74,8 +90,14 @@ function init() {
     roadarea.appendChild(roadlines);
   }
 
-  player.x = playerCar.offsetLeft;
-  player.y = playerCar.offsetTop;
+  for (x = 0; x < 5; x++) {
+    let clouds = document.createElement("div");
+    clouds.setAttribute("class", "cloud");
+    clouds.y = (x + 1) * 300 * -1;
+    clouds.style.top = clouds.y + "px";
+    clouds.style.left = Math.floor(Math.random() * 350) + "px";
+    roadarea.appendChild(clouds);
+  }
 }
 
 init();
