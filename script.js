@@ -101,11 +101,11 @@ function init() {
   player.y = playerRocket.offsetTop;
 
   for (x = 0; x < 5; x++) {
-    let roadlines = document.createElement("div");
-    roadlines.setAttribute("class", "line");
-    roadlines.y = x * 150;
-    roadlines.style.top = roadlines.y + "px";
-    roadarea.appendChild(roadlines);
+    // let roadlines = document.createElement("div");
+    // roadlines.setAttribute("class", "line");
+    // roadlines.y = x * 150;
+    // roadlines.style.top = roadlines.y + "px";
+    // roadarea.appendChild(roadlines);
   }
 
   for (x = 0; x < 5; x++) {
