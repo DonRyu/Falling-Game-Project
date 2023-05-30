@@ -35,8 +35,7 @@ function moveClouds(playerRocket) {
   let playerBoun = playerRocket.getBoundingClientRect();
 
   cloud.forEach(function (item) {
-
-    console.log('playerBoun',playerBoun)
+    console.log("playerBoun", playerBoun);
     // check if player collide
     let cloudBoun = item.getBoundingClientRect();
     if (
@@ -67,7 +66,7 @@ function playarea() {
 
   // 플레이어가 road area를 벗어나지 않도록 하기 위함
   if (player.start) {
-    // movelines();
+    movelines();
     moveClouds(playerRocket);
     if (keys.ArrowUp & (player.y > road.top + 20)) {
       player.y = player.y - player.step;
