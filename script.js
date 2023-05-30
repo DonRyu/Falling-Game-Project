@@ -30,9 +30,9 @@ function movelines() {
 }
 
 //moving cloud
-function moveClouds(playerCar) {
+function moveClouds(playerRocket) {
   let cloud = document.querySelectorAll(".cloud");
-  let playerBoun = playerCar.getBoundingClientRect();
+  let playerBoun = playerRocket.getBoundingClientRect();
 
   cloud.forEach(function (item) {
 
@@ -62,13 +62,13 @@ function moveClouds(playerCar) {
 
 //Player Moving 제한
 function playarea() {
-  let playerCar = document.querySelector(".car");
+  let playerRocket = document.querySelector(".rocket");
   let road = roadarea.getBoundingClientRect();
 
   // 플레이어가 road area를 벗어나지 않도록 하기 위함
   if (player.start) {
     // movelines();
-    moveClouds(playerCar);
+    moveClouds(playerRocket);
     if (keys.ArrowUp & (player.y > road.top + 20)) {
       player.y = player.y - player.step;
     }
@@ -82,8 +82,8 @@ function playarea() {
       // width(50) + border(2*7)
       player.x = player.x + player.step;
     }
-    playerCar.style.top = player.y + "px";
-    playerCar.style.left = player.x + "px";
+    playerRocket.style.top = player.y + "px";
+    playerRocket.style.left = player.x + "px";
     window.requestAnimationFrame(playarea);
   }
 }
@@ -93,12 +93,12 @@ function init() {
   player.start = true;
   window.requestAnimationFrame(playarea);
 
-  let playerCar = document.createElement("div");
-  playerCar.setAttribute("class", "car");
-  roadarea.appendChild(playerCar);
+  let playerRocket = document.createElement("div");
+  playerRocket.setAttribute("class", "rocket");
+  roadarea.appendChild(playerRocket);
 
-  player.x = playerCar.offsetLeft;
-  player.y = playerCar.offsetTop;
+  player.x = playerRocket.offsetLeft;
+  player.y = playerRocket.offsetTop;
 
   for (x = 0; x < 5; x++) {
     let roadlines = document.createElement("div");
