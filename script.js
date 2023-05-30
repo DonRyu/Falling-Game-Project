@@ -35,13 +35,17 @@ function moveClouds(playerCar) {
   let playerBoun = playerCar.getBoundingClientRect();
 
   cloud.forEach(function (item) {
+
+    console.log('playerBoun',playerBoun)
     // check if player collide
     let cloudBoun = item.getBoundingClientRect();
     if (
-      !(playerBoun.bottom < cloudBoun.top) ||
-      playerBoun.top < cloudBoun.bottom ||
-      playerBoun.left < cloudBoun.right ||
-      playerBoun.right < cloudBoun.left
+      !(
+        playerBoun.bottom < cloudBoun.top ||
+        playerBoun.top > cloudBoun.bottom ||
+        playerBoun.left > cloudBoun.right ||
+        playerBoun.right < cloudBoun.left
+      )
     ) {
       //Player Fail
       player.start = false;
@@ -63,7 +67,7 @@ function playarea() {
 
   // 플레이어가 road area를 벗어나지 않도록 하기 위함
   if (player.start) {
-    movelines();
+    // movelines();
     moveClouds(playerCar);
     if (keys.ArrowUp & (player.y > road.top + 20)) {
       player.y = player.y - player.step;
